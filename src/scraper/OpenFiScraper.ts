@@ -58,12 +58,8 @@ export default class OpenFIScraper {
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0",
       },
     });
-    console.log(response);
-    const blob = (await response.buffer()).toString("utf16le");
-    //const icon = new iconv.Iconv("UTF-16LE", "utf-8");
-    // const con = icon.convert(blob);
-    // console.log(con.toString("utf-8"));
-    const res = (await neatCsv(blob, {
+    const csvAsString = (await response.buffer()).toString("utf16le");
+    const res = (await neatCsv(csvAsString, {
       separator: ";",
     })) as TransactionSearchResponse[];
     return res;

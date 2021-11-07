@@ -2,6 +2,31 @@ export type TransactionSearchResponse =
   | TransactionSearchRawENResponse
   | TransactionSearchRawSVResponse;
 
+export interface InsiderTransaction {
+  publicationDateTime: Date;
+  issuer: string;
+  leiCode: string;
+  notifier: string;
+  managerialResponsibilities: string;
+  position: string;
+  closelyAssociated: boolean;
+  amendment: boolean;
+  amendmentDetails: string;
+  initialNotification: string;
+  shareOrOptionProgram: boolean;
+  transactionType: string;
+  instrumentType: string;
+  instrumentName: string;
+  isin: string;
+  transactionDateTime: Date;
+  volume: number;
+  price: number;
+  unit: string;
+  currency: string;
+  venue: string;
+  status: string;
+}
+
 export interface TransactionSearchRawENResponse {
   "Publication date": string;
   Issuer: string;

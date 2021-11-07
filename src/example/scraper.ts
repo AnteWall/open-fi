@@ -1,11 +1,9 @@
 import OpenFIScraper, { Language } from "../scraper/OpenFiScraper";
+import { generateHashId, mapTransactionENRow } from "../scraper/utils";
+import { fullSync } from "../server/worker/worker";
 
 async function main() {
-  const scraper = new OpenFIScraper();
-
-  const day = new Date(2021, 10, 5);
-
-  const res = await scraper.insiderInformation(day, Language.SV);
+  fullSync();
 }
 
 main()
