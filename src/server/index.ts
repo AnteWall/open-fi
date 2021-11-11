@@ -1,7 +1,9 @@
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+import client from "./prisma";
 import express from "express";
 import http from "http";
+import resolvers from "./resolvers";
 import typeDefs from "./typeDefs";
 
 async function startApolloServer(port: number) {
@@ -9,10 +11,11 @@ async function startApolloServer(port: number) {
   const app = express();
   const httpServer = http.createServer(app);
 
+  await client.$connect();
   // Same ApolloServer initialization as before, plus the drain plugin.
   const server = new ApolloServer({
     typeDefs,
-    resolvers: {},
+    resolvers,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
   });
 
