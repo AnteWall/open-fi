@@ -11,6 +11,7 @@ import path from "path";
 import resolvers from "./resolvers";
 import swaggerUi from "swagger-ui-express";
 import typeDefs from "./typeDefs";
+import { scrapeQueue } from "./worker/worker";
 
 const swaggerDocument = YAML.load("./swagger.yml");
 
@@ -66,9 +67,14 @@ async function startApolloServer(port: number) {
 
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   // Modified server startup
-  await new Promise<void>((resolve, reject) =>
-    httpServer.listen({ port: port }, resolve).once("error", reject)
-  );
+  await new Promise<void>((resolve, reject) => {
+    httpServer
+      .listen({ port: port }, () => {
+        scrapeQueue.add("", { repeat: { cron: "* * * * *" } });
+        resolve();
+      })
+      .once("error", reject);
+  });
 }
 
 async function main() {
