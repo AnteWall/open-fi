@@ -15,7 +15,7 @@ import { fullScrapeQueue, scrapeQueue } from "./worker/worker";
 
 const swaggerDocument = YAML.load("./swagger.yml");
 
-async function startApolloServer(port: number) {
+async function startApolloServer(port: string | number) {
   // Required logic for integrating with Express
   const app = express();
   const httpServer = http.createServer(app);
@@ -69,7 +69,7 @@ async function startApolloServer(port: number) {
   // Modified server startup
   await new Promise<void>((resolve, reject) => {
     httpServer
-      .listen({ port: port }, async () => {
+      .listen({ port: Number(port) }, async () => {
         await fullScrapeQueue.add("", {
           jobId: "full-sync",
         });
@@ -86,7 +86,7 @@ async function startApolloServer(port: number) {
 
 async function main() {
   try {
-    await startApolloServer(4000);
+    await startApolloServer(process.env.PORT || 4000);
     console.log("🚀 Server is ready at http://localhost:4000/graphql");
   } catch (err) {
     console.error("💀 Error starting the node server", err);
