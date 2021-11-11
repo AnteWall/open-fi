@@ -11,7 +11,7 @@ import path from "path";
 import resolvers from "./resolvers";
 import swaggerUi from "swagger-ui-express";
 import typeDefs from "./typeDefs";
-import { scrapeQueue } from "./worker/worker";
+import { fullScrapeQueue, scrapeQueue } from "./worker/worker";
 
 const swaggerDocument = YAML.load("./swagger.yml");
 
@@ -69,8 +69,15 @@ async function startApolloServer(port: number) {
   // Modified server startup
   await new Promise<void>((resolve, reject) => {
     httpServer
-      .listen({ port: port }, () => {
-        scrapeQueue.add("", { repeat: { cron: "* * * * *" } });
+      .listen({ port: port }, async () => {
+        await fullScrapeQueue.add("", {
+          jobId: "full-sync",
+        });
+        await scrapeQueue.clean(5000);
+        await scrapeQueue.add("", {
+          jobId: "scrape-1min",
+          repeat: { cron: "* * * * *" },
+        });
         resolve();
       })
       .once("error", reject);

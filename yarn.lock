@@ -2413,13 +2413,6 @@ fbjs@^3.0.0:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.30"
 
-fetch-blob@^3.1.2:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/fetch-blob/-/fetch-blob-3.1.3.tgz#a7dca4855e39d3e3c5a1da62d4ee335c37d26012"
-  integrity sha512-ax1Y5I9w+9+JiM+wdHkhBoxew+zG4AJ2SvAD1v1szpddUIiPERVGBxrMcB2ZqW0Y3PP8bOWYv2zqQq1Jp2kqUQ==
-  dependencies:
-    web-streams-polyfill "^3.0.3"
-
 figures@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"
@@ -2568,7 +2561,7 @@ get-stream@^5.1.0:
   dependencies:
     pump "^3.0.0"
 
-get-stream@^6.0.1:
+get-stream@^6.0.0:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-6.0.1.tgz#a262d8eef67aced57c2852ad6167526a43cbf7b7"
   integrity sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==
@@ -3620,13 +3613,14 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-neat-csv@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/neat-csv/-/neat-csv-7.0.0.tgz#3edfd4fde087ebbeb2136b87c10a81a1ea70a524"
-  integrity sha512-ZmiKZNkdqb6hrBU3lDHm52vWXs6CuFPfw6ZoJZNnY7IIpfA1fxM0UPPi+iQpqQo82qcLbsZPwLkQ1cdrMDtwwA==
+neat-csv@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/neat-csv/-/neat-csv-6.0.1.tgz#c7f9a2cd63456047e8a48d6ad708a2ec4423975d"
+  integrity sha512-j87x1Rj2KiyZeOtFzedZXV8XN7Om/BcEcclPfj84I24yq9vfarNY8DrKKN8nfwN1FtQZgBvxTfQbwpugkV2MoA==
   dependencies:
     csv-parser "^3.0.0"
-    get-stream "^6.0.1"
+    get-stream "^6.0.0"
+    to-readable-stream "^2.1.0"
 
 negotiator@0.6.2:
   version "0.6.2"
@@ -3646,18 +3640,18 @@ node-cleanup@^2.1.2:
   resolved "https://registry.yarnpkg.com/node-cleanup/-/node-cleanup-2.1.2.tgz#7ac19abd297e09a7f72a71545d951b517e4dde2c"
   integrity sha1-esGavSl+Caf3KnFUXZUbUX5N3iw=
 
+node-fetch-commonjs@3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/node-fetch-commonjs/-/node-fetch-commonjs-3.0.3.tgz#c2f9293b0cf5d2da83087537d0dc2d6351b6971c"
+  integrity sha512-k+YlCEKPlxQSxCB2sK5Gs02+b9GZxNyAHKTtk+C4znDwUx2orfZzXNnPzfT7ZZjHko0l3pLDgdO33VJ66gfqBw==
+  dependencies:
+    data-uri-to-buffer "^3.0.1"
+    web-streams-polyfill "^3.1.1"
+
 node-fetch@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
-
-node-fetch@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.0.0.tgz#79da7146a520036f2c5f644e4a26095f17e411ea"
-  integrity sha512-bKMI+C7/T/SPU1lKnbQbwxptpCrG9ashG+VkytmXCPZyuM9jB6VU+hY0oi4lC8LxTtAeWdckNCTa3nrGsAdA3Q==
-  dependencies:
-    data-uri-to-buffer "^3.0.1"
-    fetch-blob "^3.1.2"
 
 node-fetch@^2.6.1, node-fetch@^2.6.5:
   version "2.6.6"
@@ -4623,6 +4617,11 @@ to-readable-stream@^1.0.0:
   resolved "https://registry.yarnpkg.com/to-readable-stream/-/to-readable-stream-1.0.0.tgz#ce0aa0c2f3df6adf852efb404a783e77c0475771"
   integrity sha512-Iq25XBt6zD5npPhlLVXGFN3/gyR2/qODcKNNyTMd4vbm39HUaOiAM4PMq0eMVC/Tkxz+Zjdsc55g9yyz+Yq00Q==
 
+to-readable-stream@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/to-readable-stream/-/to-readable-stream-2.1.0.tgz#82880316121bea662cdc226adb30addb50cb06e8"
+  integrity sha512-o3Qa6DGg1CEXshSdvWNX2sN4QHqg03SPq7U6jPXRahlQdl5dK8oXjkU/2/sGrnOZKeGV1zLSO8qPwyKklPPE7w==
+
 to-regex-range@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-5.0.1.tgz#1648c44aae7c8d988a326018ed72f5b4dd0392e4"
@@ -4866,7 +4865,7 @@ vary@^1, vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
-web-streams-polyfill@^3.0.3:
+web-streams-polyfill@^3.1.1:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.0.tgz#a6b74026b38e4885869fb5c589e90b95ccfc7965"
   integrity sha512-EqPmREeOzttaLRm5HS7io98goBgZ7IVz79aDvqjD0kYXLtFZTc0T/U6wHTPKyIjb+MdN7DFIIX6hgdBEpWmfPA==

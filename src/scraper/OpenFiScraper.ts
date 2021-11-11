@@ -1,6 +1,6 @@
 import format from "date-fns/format";
 import merge from "lodash/merge";
-import fetch from "node-fetch";
+import fetch from "node-fetch-commonjs";
 import neatCsv from "neat-csv";
 
 import {

@@ -8,6 +8,10 @@ import Queue, { Job, DoneCallback } from "bull";
 const FIRST_DATA_DAY = new Date(2016, 5, 1);
 
 export const scrapeQueue = new Queue("scrapeQueue", process.env.REDIS_URL);
+export const fullScrapeQueue = new Queue(
+  "fullScrapeQueue",
+  process.env.REDIS_URL
+);
 
 const scrapeCronJob = async (job: Job, done: DoneCallback) => {
   console.log(`starting scrape ${new Date().toISOString()}`);
@@ -85,3 +89,5 @@ export const fullSync = async () => {
   await client.$disconnect();
   console.log("Scrape done");
 };
+
+fullScrapeQueue.process(fullSync);

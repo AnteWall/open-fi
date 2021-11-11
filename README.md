@@ -14,5 +14,25 @@ Roadmap:
 - [ ] Expose data trough REST endpoint
 - [ ] Add higher rate limit if API keys are set
 
+## Development
+
+Start by installing dependencies
+
+`yarn install`
+
+### Run dev server
+
+To start a development server run the following command.
+
+`yarn dev`
+
+### Generated GraphQL Typescript interfaces
+
+We use GraphqlCodegen to type Resolvers and other stuff for the GraphQL server.
+
+To regenerate them call
+
+`yarn graphql-codegen`
+
 [1]: https://www.fi.se/en/our-registers/pdmr-transactions
 [2]: https://www.fi.se/en
