@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  title: Open-FI API
+  version: 1.0.0
+paths:
+  /api/v1/insider:
+    get:
+      operationId: insider_query
+      parameters:
+        - in: query
+          name: last
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsiderTradeConnection'
+components:
+  schemas:
+    PageInfo:
+      type: object
+      required:
+        - hasNextPage
+        - hasPreviousPage
+      properties:
+        hasNextPage:
+          type: boolean
+        hasPreviousPage:
+          type: boolean
+        startCursor:
+          type: string
+        endCursor:
+          type: string
+    InsiderTrade:
+      type: object
+      required:
+        - id
+        - publicationDateTime
+        - issuer
+        - leiCode
+        - notifier
+        - managerialResponsibilities
+        - position
+        - closelyAssociated
+        - amendment
+        - amendmentDetails
+        - initialNotification
+        - shareOrOptionProgram
+        - transactionType
+        - instrumentType
+        - instrumentName
+        - isin
+        - transactionDateTime
+        - volume
+        - unit
+        - price
+        - currency
+        - venue
+        - status
+      properties:
+        id:
+          type: string
+        publicationDateTime:
+          type: string
+        issuer:
+          type: string
+        leiCode:
+          type: string
+        notifier:
+          type: string
+        managerialResponsibilities:
+          type: string
+        position:
+          type: string
+        closelyAssociated:
+          type: boolean
+        amendment:
+          type: boolean
+        amendmentDetails:
+          type: string
+        initialNotification:
+          type: string
+        shareOrOptionProgram:
+          type: boolean
+        transactionType:
+          type: string
+        instrumentType:
+          type: string
+        instrumentName:
+          type: string
+        isin:
+          type: string
+        transactionDateTime:
+          type: string
+        volume:
+          type: number
+          format: float
+        unit:
+          type: string
+        price:
+          type: number
+          format: float
+        currency:
+          type: string
+        venue:
+          type: string
+        status:
+          type: string
+    InsiderTradeEdge:
+      type: object
+      required:
+        - cursor
+        - node
+      properties:
+        cursor:
+          type: string
+        node:
+          $ref: '#/components/schemas/InsiderTrade'
+    InsiderTradeConnection:
+      type: object
+      required:
+        - edges
+        - pageInfo
+        - totalCount
+      properties:
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsiderTradeEdge'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        totalCount:
+          type: integer
+          format: int32
+    Query:
+      type: object
+      required:
+        - insider
+      properties:
+        insider:
+          $ref: '#/components/schemas/InsiderTradeConnection'
