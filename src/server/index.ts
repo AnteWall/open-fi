@@ -29,6 +29,7 @@ async function startApolloServer(port: string | number) {
 
   const server = new ApolloServer({
     schema,
+    introspection: true,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
   });
 
@@ -36,7 +37,6 @@ async function startApolloServer(port: string | number) {
   await server.start();
   server.applyMiddleware({
     app,
-
     // By default, apollo-server hosts its GraphQL endpoint at the
     // server root. However, *other* Apollo Server packages host it at
     // /graphql. Optionally provide this to match apollo-server.
