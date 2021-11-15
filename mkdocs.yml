@@ -1,0 +1,6 @@
+site_name: Open FI
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/AnteWall/open-fi

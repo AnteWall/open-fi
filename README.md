@@ -9,9 +9,9 @@ Roadmap:
 
 - [x] Able to scrape data from [FI][2] registry
   - [x] Insider trades
-- [ ] Save data into database
-- [ ] Expose data trough a GraphQL endpoint
-- [ ] Expose data trough REST endpoint
+- [x] Save data into database
+- [x] Expose data trough a GraphQL endpoint
+- [x] Expose data trough REST endpoint
 - [ ] Add higher rate limit if API keys are set
 
 ## Development

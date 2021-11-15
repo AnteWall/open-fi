@@ -1,3 +1,12 @@
+# Deploy
+
+To deploy your own instance of Open FI follow the steps below!
+
+OpenFI uses one Redis instance for background workers. One PostgreSQL instance to save all data. It also uses [prisma.io](https://prisma.io) for database ORM and migrations.
+
+### Docker compose
+
+```yaml
 version: "3"
 services:
   app:
@@ -10,16 +19,6 @@ services:
     depends_on:
       - redis
       - db
-  docs:
-    image: squidfunk/mkdocs-material
-    ports:
-      - "8000:8000"
-    environment:
-      LIVE_RELOAD_SUPPORT: "true"
-      FAST_MODE: "true"
-      DOCS_DIRECTORY: "/docs"
-    volumes:
-      - .:/docs
   redis:
     image: redis:latest
     ports:
@@ -32,7 +31,4 @@ services:
       - POSTGRES_DB=openfi
     ports:
       - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-volumes:
-  pgdata:
+```
