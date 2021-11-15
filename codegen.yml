@@ -1,5 +1,7 @@
 overwrite: true
-schema: "./src/server/typeDefs/**/*.ts"
+schema:
+  - "./src/server/typeDefs/**/*.ts"
+  - "scalar DateTime"
 documents: null
 generates:
   src/server/generated/graphql.ts:

@@ -17,7 +17,7 @@ const resolver: QueryResolvers = {
         client.insiderTrade.findMany({
           ...args,
           orderBy: {
-            publicationDateTime: "desc",
+            publicationDateTime: "asc",
           },
         }),
       () => client.insiderTrade.count(),

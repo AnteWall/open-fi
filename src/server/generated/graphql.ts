@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { InsiderTrade as DBInsiderTrade } from '@prisma/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
 };
 
 export type InsiderTrade = {
@@ -32,10 +33,10 @@ export type InsiderTrade = {
   notifier: Scalars['String'];
   position: Scalars['String'];
   price: Scalars['Float'];
-  publicationDateTime: Scalars['String'];
+  publicationDateTime: Scalars['DateTime'];
   shareOrOptionProgram: Scalars['Boolean'];
   status: Scalars['String'];
-  transactionDateTime: Scalars['String'];
+  transactionDateTime: Scalars['DateTime'];
   transactionType: Scalars['String'];
   unit: Scalars['String'];
   venue: Scalars['String'];
@@ -144,6 +145,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   InsiderTrade: ResolverTypeWrapper<DBInsiderTrade>;
   InsiderTradeConnection: ResolverTypeWrapper<Omit<InsiderTradeConnection, 'edges'> & { edges: Array<ResolversTypes['InsiderTradeEdge']> }>;
@@ -157,6 +159,7 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  DateTime: Scalars['DateTime'];
   Float: Scalars['Float'];
   InsiderTrade: DBInsiderTrade;
   InsiderTradeConnection: Omit<InsiderTradeConnection, 'edges'> & { edges: Array<ResolversParentTypes['InsiderTradeEdge']> };
@@ -166,6 +169,10 @@ export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
 };
+
+export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
+}
 
 export type InsiderTradeResolvers<ContextType = any, ParentType extends ResolversParentTypes['InsiderTrade'] = ResolversParentTypes['InsiderTrade']> = {
   amendment?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -183,10 +190,10 @@ export type InsiderTradeResolvers<ContextType = any, ParentType extends Resolver
   notifier?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   position?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  publicationDateTime?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  publicationDateTime?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   shareOrOptionProgram?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  transactionDateTime?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  transactionDateTime?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   transactionType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   unit?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   venue?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -220,6 +227,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type Resolvers<ContextType = any> = {
+  DateTime?: GraphQLScalarType;
   InsiderTrade?: InsiderTradeResolvers<ContextType>;
   InsiderTradeConnection?: InsiderTradeConnectionResolvers<ContextType>;
   InsiderTradeEdge?: InsiderTradeEdgeResolvers<ContextType>;

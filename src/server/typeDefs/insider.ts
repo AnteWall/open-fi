@@ -4,7 +4,7 @@ import { gql } from "apollo-server-core";
 export default gql`
   type InsiderTrade {
     id: String!
-    publicationDateTime: String!
+    publicationDateTime: DateTime!
     issuer: String!
     leiCode: String!
     notifier: String!
@@ -19,7 +19,7 @@ export default gql`
     instrumentType: String!
     instrumentName: String!
     isin: String!
-    transactionDateTime: String!
+    transactionDateTime: DateTime!
     volume: Float!
     unit: String!
     price: Float!
