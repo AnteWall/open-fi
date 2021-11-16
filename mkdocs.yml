@@ -1,4 +1,6 @@
 site_name: Open FI
+theme:
+  name: material
 
 extra:
   social:
