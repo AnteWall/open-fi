@@ -1,4 +1,5 @@
 import { OpenAPI, useSofa } from "sofa-api";
+import { fullScrapeQueue, scrapeQueue } from "./worker/worker";
 
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
@@ -11,7 +12,6 @@ import path from "path";
 import resolvers from "./resolvers";
 import swaggerUi from "swagger-ui-express";
 import typeDefs from "./typeDefs";
-import { fullScrapeQueue, scrapeQueue } from "./worker/worker";
 
 const swaggerDocument = YAML.load("./swagger.yml");
 
@@ -73,11 +73,12 @@ async function startApolloServer(port: string | number) {
         await fullScrapeQueue.add("", {
           jobId: "full-sync",
         });
-        await scrapeQueue.clean(5000);
-        await scrapeQueue.add("", {
-          jobId: "scrape-1min",
-          repeat: { cron: "* * * * *" },
+        await scrapeQueue.empty()
+        await scrapeQueue.add({ id: 'foo' }, {
+          repeat: { every: 60000, limit: 1 },
+          jobId: 'foo-id'
         });
+
         resolve();
       })
       .once("error", reject);

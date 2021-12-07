@@ -1,9 +1,11 @@
-import { InsiderTransaction } from "../../scraper/types";
-import { PrismaClient } from ".prisma/client";
-import { generateHashId, mapTransactionENRow } from "../../scraper/utils";
 import OpenFIScraper, { Language } from "../../scraper/OpenFiScraper";
+import Queue, { DoneCallback, Job } from "bull";
+import { generateHashId, mapTransactionENRow } from "../../scraper/utils";
+
+import { InsiderTransaction } from "../../scraper/types";
+import { PrismaClient } from "@prisma/client";
+import client from "../prisma";
 import eachDayOfInterval from "date-fns/eachDayOfInterval";
-import Queue, { Job, DoneCallback } from "bull";
 
 const FIRST_DATA_DAY = new Date(2016, 5, 1);
 
@@ -16,7 +18,6 @@ export const fullScrapeQueue = new Queue(
 const scrapeCronJob = async (job: Job, done: DoneCallback) => {
   console.log(`starting scrape ${new Date().toISOString()}`);
   const scraper = new OpenFIScraper();
-  const client = new PrismaClient();
   await client.$connect();
   const res = await scraper.insiderInformation(new Date(), Language.EN);
   const mappedValues = res.map(mapTransactionENRow);
@@ -72,7 +73,6 @@ const saveToDatabase = async (
 export const fullSync = async () => {
   console.log("starting full scrape");
   const scraper = new OpenFIScraper();
-  const client = new PrismaClient();
   await client.$connect();
   const days = eachDayOfInterval({
     start: FIRST_DATA_DAY,
