@@ -97,6 +97,12 @@ async function main() {
   }, 1 * 10000);
 }
 
+process.on("SIGINT", function () {
+  console.log("Caught interrupt signal");
+
+  process.exit();
+});
+
 main()
   .catch((e) => {
     console.error(e);
