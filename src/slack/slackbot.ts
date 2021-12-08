@@ -1,8 +1,9 @@
-import { TransactionSearchRawENResponse } from "./../scraper/types";
 import OpenFIScraper, { Language } from "../scraper/OpenFiScraper";
 import { generateHashId, mapTransactionENRow } from "../scraper/utils";
-import dotenv from "dotenv";
+
+import { TransactionSearchRawENResponse } from "./../scraper/types";
 import axios from "axios";
+import dotenv from "dotenv";
 import { response } from "express";
 
 dotenv.config();
@@ -14,15 +15,11 @@ function postToSlack(rows: TransactionSearchRawENResponse[]) {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `*${row["Instrument name"]}*\n:loudspeaker: ${
-          row["Publication date"]
-        }\n:currency_exchange: ${row["Transaction date"]}\n *${
-          row.Notifier
-        }* - _${row.Position}_\n ${row.Volume} ${row["Intrument type"]} at ${
-          row.Price
-        } ${row.Currency}\n *Total:* ${
-          Number(row.Price) * Number(row.Volume)
-        } ${row.Currency}\n _${row["Trading venue"]}_ - _${row.ISIN}_`,
+        text: `*${row["Instrument name"]}*\n:loudspeaker: ${row["Publication date"]
+          }\n:currency_exchange: ${row["Transaction date"]}\n *${row.Notifier
+          }* - _${row.Position}_\n ${row.Volume} ${row["Intrument type"]} at ${row.Price
+          } ${row.Currency}\n *Total:* ${Number(row.Price) * Number(row.Volume)
+          } ${row.Currency}\n _${row["Trading venue"]}_ - _${row.ISIN}_`,
       },
     };
   });
@@ -63,6 +60,7 @@ const checkForNewEntries = async (
   const filters = res.filter((r) => {
     const mapped = mapTransactionENRow(r);
     return (
+      mapped.transactionType === "Acquisition" &&
       mapped.instrumentType === "Share" &&
       mapped.closelyAssociated == false &&
       mapped.shareOrOptionProgram == false
@@ -108,4 +106,4 @@ main()
     console.error(e);
     process.exit(1);
   })
-  .finally(async () => {});
+  .finally(async () => { });
