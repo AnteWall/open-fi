@@ -15,7 +15,7 @@ function postToSlack(rows: TransactionSearchRawENResponse[]) {
       type: "section",
       text: {
         type: "mrkdwn",
-        text: `*${row["Instrument name"]}*\n:loudspeaker: ${row["Publication date"]
+        text: `*${row.Issuer}*\n:loudspeaker: ${row["Publication date"]
           }\n:currency_exchange: ${row["Transaction date"]}\n *${row.Notifier
           }* - _${row.Position}_\n ${row.Volume} ${row["Intrument type"]} at ${row.Price
           } ${row.Currency}\n *Total:* ${Number(row.Price) * Number(row.Volume)
